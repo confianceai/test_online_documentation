@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>neural_de.transformations package &mdash; NeuralDE 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8d563738"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="neural_de.external.prenet package" href="neural_de.external.prenet.html" />
+    <link rel="prev" title="👨‍💻 neural_de package" href="neural_de.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            NeuralDE
+          </a>
+              <div class="version">
+                1.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="guidelines.html">📖 Guidelines:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tech_docs.html">📚 Technical docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory_overview.html">💡 Theory Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="neural_de.html">👨‍💻 neural_de package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="neural_de.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">neural_de.transformations package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#derain-enhancer-module">Derain enhancer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#desnow-enhancer-module">Desnow enhancer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#deblurring-enhancer-module">Deblurring enhancer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#night-image-enhancer-module">Night image enhancer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#resolution-enhancer-module">Resolution enhancer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#brightness-enhancer-module">Brightness enhancer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#centered-zoom-module">Centered zoom module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diffusionenhancer">DiffusionEnhancer</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="neural_de.external.prenet.html">neural_de.external.prenet package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="neural_de.external.nplie.html">neural_de.external.nplie package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="neural_de.external.maxim_tf.html">neural_de.external.maxim_tf package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="neural_de.external.maxim_tf.maxim.html">neural_de.external.maxim_tf.maxim package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="neural_de.external.maxim_tf.maxim.blocks.html">neural_de.external.maxim_tf.maxim.blocks package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="neural_de.external.derain.html">neural_de.external.derain package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="neural_de.utils.html">neural_de.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="neural_de.html#module-neural_de">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">🔄 Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">NeuralDE</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="neural_de.html">👨‍💻 neural_de package</a></li>
+      <li class="breadcrumb-item active">neural_de.transformations package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/neural_de_transformations.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="neural-de-transformations-package">
+<h1>neural_de.transformations package<a class="headerlink" href="#neural-de-transformations-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="derain-enhancer-module">
+<h2>Derain enhancer module<a class="headerlink" href="#derain-enhancer-module" title="Link to this heading"></a></h2>
+<p id="module-neural_de.transformations._derain_enhancer"><span id="derain-enhancer-label"></span>DeRain enhancer</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="neural_de.transformations._derain_enhancer.DeRainConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neural_de.transformations._derain_enhancer.</span></span><span class="sig-name descname"><span class="pre">DeRainConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">upsample_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bilinear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ngf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_blocks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_nc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_nc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'reflect'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neural_de/transformations/_derain_enhancer.html#DeRainConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neural_de.transformations._derain_enhancer.DeRainConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Interal configuration of the DeRain enhancer.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._derain_enhancer.DeRainConfig.input_nc">
+<span class="sig-name descname"><span class="pre">input_nc</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#neural_de.transformations._derain_enhancer.DeRainConfig.input_nc" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._derain_enhancer.DeRainConfig.n_blocks">
+<span class="sig-name descname"><span class="pre">n_blocks</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">9</span></em><a class="headerlink" href="#neural_de.transformations._derain_enhancer.DeRainConfig.n_blocks" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._derain_enhancer.DeRainConfig.ngf">
+<span class="sig-name descname"><span class="pre">ngf</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">64</span></em><a class="headerlink" href="#neural_de.transformations._derain_enhancer.DeRainConfig.ngf" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._derain_enhancer.DeRainConfig.output_nc">
+<span class="sig-name descname"><span class="pre">output_nc</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#neural_de.transformations._derain_enhancer.DeRainConfig.output_nc" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._derain_enhancer.DeRainConfig.padding_type">
+<span class="sig-name descname"><span class="pre">padding_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'reflect'</span></em><a class="headerlink" href="#neural_de.transformations._derain_enhancer.DeRainConfig.padding_type" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._derain_enhancer.DeRainConfig.upsample_mode">
+<span class="sig-name descname"><span class="pre">upsample_mode</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'bilinear'</span></em><a class="headerlink" href="#neural_de.transformations._derain_enhancer.DeRainConfig.upsample_mode" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._derain_enhancer.DeRainConfig.use_dropout">
+<span class="sig-name descname"><span class="pre">use_dropout</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#neural_de.transformations._derain_enhancer.DeRainConfig.use_dropout" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="neural_de.transformations._derain_enhancer.DeRainEnhancer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neural_de.transformations._derain_enhancer.</span></span><span class="sig-name descname"><span class="pre">DeRainEnhancer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neural_de/transformations/_derain_enhancer.html#DeRainEnhancer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neural_de.transformations._derain_enhancer.DeRainEnhancer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransformation</span></code></p>
+<p>Provides a rain removal image transformation using the GT-Rain Derain Model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>device</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Any torch-compatible device string.</p></li>
+<li><p><strong>logger</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Logger</span></code>]) – It is recommended to use the Confiance logger, obtainable with
+neural_de.utils.get_logger(…). If None, one logging with stdout will be provided.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="neural_de.transformations._derain_enhancer.DeRainEnhancer.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neural_de/transformations/_derain_enhancer.html#DeRainEnhancer.transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neural_de.transformations._derain_enhancer.DeRainEnhancer.transform" title="Link to this definition"></a></dt>
+<dd><p>Removes the rain in a batch of images. It differs from style transfer, as it does not remove
+pools and ground reflection. The outputs are as “as if the rained just stop
+falling”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>images</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>]) – Batch of images. Each image should be of a <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> of target_shape <em>(h,w,
+channels)</em>. Images dimensions should be identical across one batch.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The same images without rain falling on it.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="desnow-enhancer-module">
+<h2>Desnow enhancer module<a class="headerlink" href="#desnow-enhancer-module" title="Link to this heading"></a></h2>
+<p id="module-neural_de.transformations._desnow_enhancer"><span id="desnow-enhancer-label"></span>Snow removal enhancer - Prenet Based implementation</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="neural_de.transformations._desnow_enhancer.DeSnowEnhancer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neural_de.transformations._desnow_enhancer.</span></span><span class="sig-name descname"><span class="pre">DeSnowEnhancer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neural_de/transformations/_desnow_enhancer.html#DeSnowEnhancer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neural_de.transformations._desnow_enhancer.DeSnowEnhancer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransformation</span></code></p>
+<p>Snow Removal Enhancer, Prenet based implementation.</p>
+<p>** WARNING ** : The current method may have bad results on real images. The model had been trained
+on a simulated dataset, thus if the dataset is so different of the trained dataset, the results are not guaranteed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>device</strong> – Any torch-compatible device string.</p></li>
+<li><p><strong>logger</strong> – It is recommended to use the Confiance logger, obtainable with
+neural_de.utils.get_logger(…). If None, one logging with stdout will be provided.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="neural_de.transformations._desnow_enhancer.DeSnowEnhancer._setup_model">
+<span class="sig-name descname"><span class="pre">_setup_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neural_de/transformations/_desnow_enhancer.html#DeSnowEnhancer._setup_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neural_de.transformations._desnow_enhancer.DeSnowEnhancer._setup_model" title="Link to this definition"></a></dt>
+<dd><p>Load and initialize a PreNet model trained for snow removal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="neural_de.external.prenet.html#neural_de.external.prenet.networks.PReNet" title="neural_de.external.prenet.networks.PReNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">PReNet</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="neural_de.transformations._desnow_enhancer.DeSnowEnhancer.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neural_de/transformations/_desnow_enhancer.html#DeSnowEnhancer.transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neural_de.transformations._desnow_enhancer.DeSnowEnhancer.transform" title="Link to this definition"></a></dt>
+<dd><p>Removes the snow in a batch of images.</p>
+<p><strong>WARNING</strong> : The current method may have bad results on real images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>images</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Batch of images. Each image should be of a <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> of target_shape <em>(h,w,
+channels)</em>. Images dimensions should be identical across one batch.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The same images without snow on it.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="deblurring-enhancer-module">
+<h2>Deblurring enhancer module<a class="headerlink" href="#deblurring-enhancer-module" title="Link to this heading"></a></h2>
+<p id="module-neural_de.transformations._kernel_deblurring_enhancer"><span id="kernel-deblurring-enhancer-label"></span>Simple wrapper to share experimental results on working params for a Deblurring Kernel</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="neural_de.transformations._kernel_deblurring_enhancer.KernelDeblurringEnhancer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neural_de.transformations._kernel_deblurring_enhancer.</span></span><span class="sig-name descname"><span class="pre">KernelDeblurringEnhancer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kernel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'high'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_kernel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neural_de/transformations/_kernel_deblurring_enhancer.html#KernelDeblurringEnhancer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neural_de.transformations._kernel_deblurring_enhancer.KernelDeblurringEnhancer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransformation</span></code></p>
+<p>Kernel Deblurring image transformation based on OpenCv implementation. Provides pre-set
+filter of medium and high intensity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kernel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – <code class="docutils literal notranslate"><span class="pre">high</span></code> or <code class="docutils literal notranslate"><span class="pre">medium</span></code>: use a pre-set kernel with high or medium intensity.</p></li>
+<li><p><strong>custom</strong> – Optional, custom kernel to use. It can be any non empty 2D matrix. If provided,
+the value of <cite>kernel</cite> will not be used.</p></li>
+<li><p><strong>logger</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Logger</span></code>]) – It is recommended to use the Confiance logger, obtainable with
+neural_de.utils.get_logger(…). If None, one logging with stdout will be provided.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="neural_de.transformations._kernel_deblurring_enhancer.KernelDeblurringEnhancer.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neural_de/transformations/_kernel_deblurring_enhancer.html#KernelDeblurringEnhancer.transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neural_de.transformations._kernel_deblurring_enhancer.KernelDeblurringEnhancer.transform" title="Link to this definition"></a></dt>
+<dd><p>Deblur a batch of images using a Kernel-based method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>images</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>]) – Batch of images. Each image should be of a <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> of target_shape <em>(h,w,
+channels)</em>. Images dimensions do not need to be the same across the batch.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The same images with less blurr.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="night-image-enhancer-module">
+<h2>Night image enhancer module<a class="headerlink" href="#night-image-enhancer-module" title="Link to this heading"></a></h2>
+<p id="module-neural_de.transformations._night_image_enhancer"><span id="night-image-enhancer-label"></span>Night to day enhancer - Maxim based implementation</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="neural_de.transformations._night_image_enhancer.NightConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neural_de.transformations._night_image_enhancer.</span></span><span class="sig-name descname"><span class="pre">NightConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variant</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'S-2'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_bias</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_supervision_scales</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neural_de/transformations/_night_image_enhancer.html#NightConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neural_de.transformations._night_image_enhancer.NightConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Static Enhancer configuration</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._night_image_enhancer.NightConfig.dropout_rate">
+<span class="sig-name descname"><span class="pre">dropout_rate</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></em><a class="headerlink" href="#neural_de.transformations._night_image_enhancer.NightConfig.dropout_rate" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._night_image_enhancer.NightConfig.num_outputs">
+<span class="sig-name descname"><span class="pre">num_outputs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#neural_de.transformations._night_image_enhancer.NightConfig.num_outputs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._night_image_enhancer.NightConfig.num_supervision_scales">
+<span class="sig-name descname"><span class="pre">num_supervision_scales</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#neural_de.transformations._night_image_enhancer.NightConfig.num_supervision_scales" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._night_image_enhancer.NightConfig.use_bias">
+<span class="sig-name descname"><span class="pre">use_bias</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#neural_de.transformations._night_image_enhancer.NightConfig.use_bias" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._night_image_enhancer.NightConfig.variant">
+<span class="sig-name descname"><span class="pre">variant</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'S-2'</span></em><a class="headerlink" href="#neural_de.transformations._night_image_enhancer.NightConfig.variant" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="neural_de.transformations._night_image_enhancer.NightImageEnhancer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neural_de.transformations._night_image_enhancer.</span></span><span class="sig-name descname"><span class="pre">NightImageEnhancer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neural_de/transformations/_night_image_enhancer.html#NightImageEnhancer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neural_de.transformations._night_image_enhancer.NightImageEnhancer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransformation</span></code></p>
+<p>Provides Night to Day image transformation using the MAXIM model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>logger</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Logger</span></code>]) – It is recommended to use the Confiance logger, obtainable with
+neural_de.utils.get_logger(…). If None, one logging with stdout will be provided.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="neural_de.transformations._night_image_enhancer.NightImageEnhancer._init_pipeline">
+<span class="sig-name descname"><span class="pre">_init_pipeline</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neural_de/transformations/_night_image_enhancer.html#NightImageEnhancer._init_pipeline"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neural_de.transformations._night_image_enhancer.NightImageEnhancer._init_pipeline" title="Link to this definition"></a></dt>
+<dd><p>Initialize the MAXIM model and pipeline.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="neural_de.transformations._night_image_enhancer.NightImageEnhancer._preprocessing">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_preprocessing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neural_de/transformations/_night_image_enhancer.html#NightImageEnhancer._preprocessing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neural_de.transformations._night_image_enhancer.NightImageEnhancer._preprocessing" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Preprocess an image batch for the MAXIM model :</dt><dd><ul class="simple">
+<li><p>normalize</p></li>
+<li><p>pad (with reflection) so that the image dimension are a multiple of <em>S2_PADDING</em> if
+they are not</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>images</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – image batch to preprocess.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="neural_de.transformations._night_image_enhancer.NightImageEnhancer.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neural_de/transformations/_night_image_enhancer.html#NightImageEnhancer.transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neural_de.transformations._night_image_enhancer.NightImageEnhancer.transform" title="Link to this definition"></a></dt>
+<dd><p>Transform a batch of night image into “day images”, ie the same image but looking
+as if taken in daylight.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>images</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>]) – Batch of images. Each image should be of a <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> of target_shape <em>(h,w,
+channels)</em>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The same images transformed as if taken in daylight.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="resolution-enhancer-module">
+<h2>Resolution enhancer module<a class="headerlink" href="#resolution-enhancer-module" title="Link to this heading"></a></h2>
+<p id="module-neural_de.transformations._resolution_enhancer"><span id="resolution-enhancer-label"></span>Implementation of the ResolutionEnhancer method.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._resolution_enhancer.UPSCALE_MODEL">
+<span class="sig-prename descclassname"><span class="pre">neural_de.transformations._resolution_enhancer.</span></span><span class="sig-name descname"><span class="pre">UPSCALE_MODEL</span></span><a class="headerlink" href="#neural_de.transformations._resolution_enhancer.UPSCALE_MODEL" title="Link to this definition"></a></dt>
+<dd><p>version of the transformer model used for image upscaling</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="neural_de.transformations._resolution_enhancer.ResolutionEnhancer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neural_de.transformations._resolution_enhancer.</span></span><span class="sig-name descname"><span class="pre">ResolutionEnhancer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neural_de/transformations/_resolution_enhancer.html#ResolutionEnhancer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neural_de.transformations._resolution_enhancer.ResolutionEnhancer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransformation</span></code></p>
+<p>BaseTransformation method for image resolution change.
+It uses neural-based method for resolution enhancement, and Opencv for diminishing the
+resolution.</p>
+<dl>
+<dt>Example :</dt><dd><p>See the notebook <cite>examples/ResolutionEnhancer_example.ipynb</cite> for more usage details.</p>
+<p>1- Import the class</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">neural_de.transformations</span> <span class="kn">import</span> <span class="n">ResolutionEnhancer</span>
+</pre></div>
+</div>
+<p>2- Create an instance of ResolutionEnhancer.
+<code class="docutils literal notranslate"><span class="pre">device</span> <span class="pre">=&quot;Cuda&quot;</span></code> is recommended if you have a gpu and torch with cuda enabled.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">res_shift</span> <span class="o">=</span> <span class="n">ResolutionEnhancer</span><span class="p">(</span><span class="n">device</span><span class="o">=</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>3- Apply the resolution change to a batch of images to a given shape</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">out_images</span> <span class="o">=</span> <span class="n">res_shift</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">ratio</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>device</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Any torch-compatible device string.</p></li>
+<li><p><strong>logger</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Logger</span></code>]) – It is recommended to use the Confiance logger, obtainable with
+neural_de.utils.get_logger(…). If None, one logging with stdout will be provided.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="neural_de.transformations._resolution_enhancer.ResolutionEnhancer._init_nn">
+<span class="sig-name descname"><span class="pre">_init_nn</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/neural_de/transformations/_resolution_enhancer.html#ResolutionEnhancer._init_nn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neural_de.transformations._resolution_enhancer.ResolutionEnhancer._init_nn" title="Link to this definition"></a></dt>
+<dd><p>Initialise the Swin2SR neural network used for image upsampling.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="neural_de.transformations._resolution_enhancer.ResolutionEnhancer._intermediate_sampling">
+<span class="sig-name descname"><span class="pre">_intermediate_sampling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neural_de/transformations/_resolution_enhancer.html#ResolutionEnhancer._intermediate_sampling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neural_de.transformations._resolution_enhancer.ResolutionEnhancer._intermediate_sampling" title="Link to this definition"></a></dt>
+<dd><p>Uses <strong>OpenCv</strong> resize to get the image resolution to half the size of the final
+target_shape.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Image to resize.</p></li>
+<li><p><strong>shape</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>) – Target size</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Resized image with half the size of target size</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="neural_de.transformations._resolution_enhancer.ResolutionEnhancer._upsample">
+<span class="sig-name descname"><span class="pre">_upsample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neural_de/transformations/_resolution_enhancer.html#ResolutionEnhancer._upsample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neural_de.transformations._resolution_enhancer.ResolutionEnhancer._upsample" title="Link to this definition"></a></dt>
+<dd><p>Uses a <strong>SwinTransformer</strong> to raise the resolution of image by a factor 2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>images</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – Batch of identically shaped images to resize.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Resized image</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="neural_de.transformations._resolution_enhancer.ResolutionEnhancer.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crop_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neural_de/transformations/_resolution_enhancer.html#ResolutionEnhancer.transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neural_de.transformations._resolution_enhancer.ResolutionEnhancer.transform" title="Link to this definition"></a></dt>
+<dd><p>Modify the resolution of a batch of images to a given target_shape.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>images</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>]) – Batch of images. Each image should be of a <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> of target_shape <em>(h,w,
+channels)</em></p></li>
+<li><p><strong>target_shape</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>]) – New resolution (h,w) in pixel.</p></li>
+<li><p><strong>crop_ratio</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – image cropping ratio (range in [0., 1.[)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Images with new resolution.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="brightness-enhancer-module">
+<h2>Brightness enhancer module<a class="headerlink" href="#brightness-enhancer-module" title="Link to this heading"></a></h2>
+<p id="module-neural_de.transformations._brightness_enhancer"><span id="brightness-enhancer-label"></span>Image brightness enhancement method.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="neural_de.transformations._brightness_enhancer.BrightnessEnhancer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neural_de.transformations._brightness_enhancer.</span></span><span class="sig-name descname"><span class="pre">BrightnessEnhancer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neural_de/transformations/_brightness_enhancer.html#BrightnessEnhancer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neural_de.transformations._brightness_enhancer.BrightnessEnhancer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransformation</span></code></p>
+<p>BaseTransformation method for image brightness change.
+It uses NPLIE-based method for brightness enhancement, and Opencv for transforming the
+image.</p>
+<dl>
+<dt>Example :</dt><dd><p>See the notebook <cite>examples/BrightnessEnhancer_example.ipynb</cite> for more usage details.</p>
+<p>1- Import the class</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">neural_de.transformations</span> <span class="kn">import</span> <span class="n">BrightnessEnhancer</span>
+</pre></div>
+</div>
+<p>2- Create an instance of BrightnessEnhancer.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bright_ehn</span> <span class="o">=</span> <span class="n">BrightnessEnhancer</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>3- Apply the brightness change to a batch of images to a given shape</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">out_images</span> <span class="o">=</span> <span class="n">bright_ehn</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>logger</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Logger</span></code>]) – <p>It is recommended to use the Confiance logger, obtainable with
+neural_de.utils.get_logger(…).</p>
+<blockquote>
+<div><p>If None, one logging with stdout will be provided.</p>
+</div></blockquote>
+</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="neural_de.transformations._brightness_enhancer.BrightnessEnhancer.enhance_brightness">
+<span class="sig-name descname"><span class="pre">enhance_brightness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neural_de/transformations/_brightness_enhancer.html#BrightnessEnhancer.enhance_brightness"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neural_de.transformations._brightness_enhancer.BrightnessEnhancer.enhance_brightness" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Image</strong> – numpy array format with float32 dtype.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Image numpy array format with float32 dtype.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="neural_de.transformations._brightness_enhancer.BrightnessEnhancer.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neural_de/transformations/_brightness_enhancer.html#BrightnessEnhancer.transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neural_de.transformations._brightness_enhancer.BrightnessEnhancer.transform" title="Link to this definition"></a></dt>
+<dd><p>Improve brightness a batch of images using a NPLIE-based method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>images</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>]) – Batch of images. Each image should be of a <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> of target_shape <em>(h,w,
+channels)</em>. Images dimensions do not need to be the same across the batch.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The same images with improved brightness.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="centered-zoom-module">
+<h2>Centered zoom module<a class="headerlink" href="#centered-zoom-module" title="Link to this heading"></a></h2>
+<p id="module-neural_de.transformations._centered_zoom"><span id="centered-zoom-label"></span>Simple wrapper to share experimental results on working params for a CenteredZoom</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="neural_de.transformations._centered_zoom.CenteredZoom">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neural_de.transformations._centered_zoom.</span></span><span class="sig-name descname"><span class="pre">CenteredZoom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keep_ratio</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neural_de/transformations/_centered_zoom.html#CenteredZoom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neural_de.transformations._centered_zoom.CenteredZoom" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransformation</span></code></p>
+<p>CenteredZoom image transformation based on a numpy implementation.
+Given a batch of 3-channels image of size width x height, return the centered tile of size
+width*keep_ratio x height*keep_ratio.
+This transformation does not perform any resolution enhancement of the returned content.
+See ResolutionEnhancer to perform both crop and resolution enhancement.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>keep_ratio</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – The proportion of the input image we keep. Must be in ]0,1[.</p></li>
+<li><p><strong>logger</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Logger</span></code>]) – It is recommended to use the Confiance logger, obtainable with
+neural_de.utils.get_logger(…). If None, one logging with stdout will be provided.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="neural_de.transformations._centered_zoom.CenteredZoom.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neural_de/transformations/_centered_zoom.html#CenteredZoom.transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neural_de.transformations._centered_zoom.CenteredZoom.transform" title="Link to this definition"></a></dt>
+<dd><p>Apply CenteredZoom to a batch of images using numpy slicing method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>images</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>]) – Batch of images. Each image should be of a <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> of target_shape <em>(h,w,
+channels)</em>. Images dimensions do not need to be the same across the batch.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The images zoomed to a given ratio in respect to its center.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="neural_de.transformations._centered_zoom.CenteredZoom.transform_with_annotations">
+<span class="sig-name descname"><span class="pre">transform_with_annotations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neural_de/transformations/_centered_zoom.html#CenteredZoom.transform_with_annotations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neural_de.transformations._centered_zoom.CenteredZoom.transform_with_annotations" title="Link to this definition"></a></dt>
+<dd><p>Transform bounding boxes to the reference in the new zoomed image.
+:type images: <code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>]
+:param images: Batch of images. Each image should be of a <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> of target_shape <em>(h,w,
+:param channels)</em>. Images dimensions do not need to be the same across the batch.:
+:type bbox: <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>
+:param bbox: list of list of list [batch_dim, nb_object_per_image, [x1, y1, x2, y2]]
+:param with the x1:
+:param y1:
+:param x2:
+:param y2 bounding box position in the original image.:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p>The images zoomed to a given ratio in respect to its center.
+The list of <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> with the x1, y1, x2, y2 bounding box position in the zoomed</p>
+<blockquote>
+<div><p>image.</p>
+</div></blockquote>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="diffusionenhancer">
+<h2>DiffusionEnhancer<a class="headerlink" href="#diffusionenhancer" title="Link to this heading"></a></h2>
+<dl class="py class" id="module-neural_de.transformations._diffusion._diffusion_enhancer">
+<span id="diffusion-enhancer-label"></span><dt class="sig sig-object py" id="neural_de.transformations._diffusion._diffusion_enhancer.DiffusionEnhancer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neural_de.transformations._diffusion._diffusion_enhancer.</span></span><span class="sig-name descname"><span class="pre">DiffusionEnhancer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">DiffPureConfig(weights_path=PosixPath('/home/jovyan/.neuralde/diffpure/256x256_diffusion_uncond.pt'),</span> <span class="pre">img_shape=(3,</span> <span class="pre">256,</span> <span class="pre">256),</span> <span class="pre">attention_resolutions=[32,</span> <span class="pre">16,</span> <span class="pre">8],</span> <span class="pre">num_classes=None,</span> <span class="pre">dims=2,</span> <span class="pre">learn_sigma=True,</span> <span class="pre">num_channels=256,</span> <span class="pre">num_head_channels=64,</span> <span class="pre">num_res_blocks=2,</span> <span class="pre">resblock_updown=True,</span> <span class="pre">use_fp16=True,</span> <span class="pre">use_scale_shift_norm=True,</span> <span class="pre">num_heads=4,</span> <span class="pre">num_heads_upsample=-1,</span> <span class="pre">channel_mult=None,</span> <span class="pre">dropout=0.0,</span> <span class="pre">use_new_attention_order=False,</span> <span class="pre">t=150,</span> <span class="pre">t_delta=15,</span> <span class="pre">use_bm=False,</span> <span class="pre">use_checkpoint=False,</span> <span class="pre">conv_resample=True,</span> <span class="pre">sample_step=1,</span> <span class="pre">rand_t=False)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neural_de/transformations/_diffusion/_diffusion_enhancer.html#DiffusionEnhancer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neural_de.transformations._diffusion._diffusion_enhancer.DiffusionEnhancer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTransformation</span></code></p>
+<p>The goal of this class is to purify a batch of images, to reduce noise and to increase
+robustness against potential adversarial attacks contained in the images. The weights given in
+this librairy are adapted for an output in 256*256 format. Of course, all sizes are
+supported in input but the enhancer will resize the images to 256*256.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>device</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">DeviceObjType</span></code>]) – some steps can be computed with cpu but a gpu is highly recommended.</p></li>
+<li><p><strong>config</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<a class="reference internal" href="#neural_de.transformations._diffusion._diffpure_config.DiffPureConfig" title="neural_de.transformations._diffusion._diffpure_config.DiffPureConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">DiffPureConfig</span></code></a>]) – an instance of the DiffPureConfig class. The most important attributes are: t,
+sample_step and t_delta. Higher t or sample step will lead to a stronger denoising, at
+the cost of processing time. t_delta is the quantity of noise added by the method before
+it’s diffusion process : the higher, the higher the chances to remove adversarial attacks,
+at the cost of a potentiel loss of quality in the images.
+The other attributes of DiffPureConfig should be modified for a custom
+Diffusion model.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="neural_de.transformations._diffusion._diffusion_enhancer.DiffusionEnhancer.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neural_de/transformations/_diffusion/_diffusion_enhancer.html#DiffusionEnhancer.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neural_de.transformations._diffusion._diffusion_enhancer.DiffusionEnhancer.forward" title="Link to this definition"></a></dt>
+<dd><p>Apply the diffusion process to a tensor of images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code>) – Tensor of batch images</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Tensor of images after diffusion.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="neural_de.transformations._diffusion._diffusion_enhancer.DiffusionEnhancer.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_batch</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neural_de/transformations/_diffusion/_diffusion_enhancer.html#DiffusionEnhancer.transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neural_de.transformations._diffusion._diffusion_enhancer.DiffusionEnhancer.transform" title="Link to this definition"></a></dt>
+<dd><p>“Purify” (removes noise and noise-based adverserial attacks) a batch of input images by
+applying a diffusion process to the images.</p>
+<p>The images are resized to the diffusion model supported size (currently 256*256) :
+you may want to resize/enhance the resolution of the output images. If the input images do
+not have the same h and w, the resizing process will crop to a square image, thus losing
+some information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>image_batch</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code>]) – Batch of images to purify (numpy array or torch.Tensor).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The batch of purified images (numpy array).</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-neural_de.transformations._diffusion._diffpure_config">
+<dt class="sig sig-object py" id="neural_de.transformations._diffusion._diffpure_config.DiffPureConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">neural_de.transformations._diffusion._diffpure_config.</span></span><span class="sig-name descname"><span class="pre">DiffPureConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weights_path=PosixPath('/home/jovyan/.neuralde/diffpure/256x256_diffusion_uncond.pt')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_shape=(3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">256)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attention_resolutions=&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_classes=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dims=2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learn_sigma=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_channels=256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_head_channels=64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_res_blocks=2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resblock_updown=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_fp16=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_scale_shift_norm=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_heads=4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_heads_upsample=-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_mult=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout=0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_new_attention_order=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t=150</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_delta=15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_bm=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_checkpoint=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conv_resample=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_step=1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rand_t=False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/neural_de/transformations/_diffusion/_diffpure_config.html#DiffPureConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#neural_de.transformations._diffusion._diffpure_config.DiffPureConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A dataclass to configure and provide parameters for the internal diffusion model of
+diffusion_enhancer.</p>
+<p>Most of the parameters are available to allow a custom usage of a different pre-trained
+diffusion models, based on the U-net architecture and code.
+The one which can be modified with the provided model are t, t_delta and sample_steps.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.weights_path">
+<span class="sig-name descname"><span class="pre">weights_path</span></span><a class="headerlink" href="#neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.weights_path" title="Link to this definition"></a></dt>
+<dd><p>Path of the pre-trained weights, to provide custom weights files.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.img_shape">
+<span class="sig-name descname"><span class="pre">img_shape</span></span><a class="headerlink" href="#neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.img_shape" title="Link to this definition"></a></dt>
+<dd><p>the shape of each input image of the diffusion model (by default (3, 256, 256)).
+Dimension are hannel-first.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.attention_resolutions">
+<span class="sig-name descname"><span class="pre">attention_resolutions</span></span><a class="headerlink" href="#neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.attention_resolutions" title="Link to this definition"></a></dt>
+<dd><p>resolution, in pixels, of the attention-layers of the model</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.num_classes">
+<span class="sig-name descname"><span class="pre">num_classes</span></span><a class="headerlink" href="#neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.num_classes" title="Link to this definition"></a></dt>
+<dd><p>int. (by default None). Number of classes the diffusion model is trained of.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.dims">
+<span class="sig-name descname"><span class="pre">dims</span></span><a class="headerlink" href="#neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.dims" title="Link to this definition"></a></dt>
+<dd><p>int. images 1D, 2D or 3D (by default = 2)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.learn_sigma">
+<span class="sig-name descname"><span class="pre">learn_sigma</span></span><a class="headerlink" href="#neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.learn_sigma" title="Link to this definition"></a></dt>
+<dd><p>bool (by default = True). If true, the output channel number will be 6 instead
+of 3.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.num_channels">
+<span class="sig-name descname"><span class="pre">num_channels</span></span><a class="headerlink" href="#neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.num_channels" title="Link to this definition"></a></dt>
+<dd><p>int (by default 256). Base channel number for the layers of the diffusion
+model architecture.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.num_head_channels">
+<span class="sig-name descname"><span class="pre">num_head_channels</span></span><a class="headerlink" href="#neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.num_head_channels" title="Link to this definition"></a></dt>
+<dd><p>int (by default 64). Number of channel per head of the attention blocks.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.num_res_blocks">
+<span class="sig-name descname"><span class="pre">num_res_blocks</span></span><a class="headerlink" href="#neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.num_res_blocks" title="Link to this definition"></a></dt>
+<dd><p>int (by default 2). Number of residual block of the architecture.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.resblock_updown">
+<span class="sig-name descname"><span class="pre">resblock_updown</span></span><a class="headerlink" href="#neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.resblock_updown" title="Link to this definition"></a></dt>
+<dd><p>bool (by default True). Whether to apply a downsampling after each residual
+block of the underlying Unet architecture.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.use_fp16">
+<span class="sig-name descname"><span class="pre">use_fp16</span></span><a class="headerlink" href="#neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.use_fp16" title="Link to this definition"></a></dt>
+<dd><p>bool (by default True). Use 16bit floating -point precision. If cuda is not
+available, will be set as false (fp32).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.use_scale_shift_norm">
+<span class="sig-name descname"><span class="pre">use_scale_shift_norm</span></span><a class="headerlink" href="#neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.use_scale_shift_norm" title="Link to this definition"></a></dt>
+<dd><p>bool (by default True). Normalisation of the output of each block
+of layers in the Unet architecture.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.num_heads">
+<span class="sig-name descname"><span class="pre">num_heads</span></span><a class="headerlink" href="#neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.num_heads" title="Link to this definition"></a></dt>
+<dd><p>int (by default 4). Number of attention heads.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.num_heads_upsample">
+<span class="sig-name descname"><span class="pre">num_heads_upsample</span></span><a class="headerlink" href="#neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.num_heads_upsample" title="Link to this definition"></a></dt>
+<dd><p>int (by default -1). Num head for upsampling attention layers.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.channel_mult">
+<span class="sig-name descname"><span class="pre">channel_mult</span></span><a class="headerlink" href="#neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.channel_mult" title="Link to this definition"></a></dt>
+<dd><p>tuple (by default None). Will be computed if not provided. Depending on the
+resolution, multiply the base channel number to get the final one for each residual layer
+of the Unet model.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.dropout">
+<span class="sig-name descname"><span class="pre">dropout</span></span><a class="headerlink" href="#neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.dropout" title="Link to this definition"></a></dt>
+<dd><p>float (by default 0.0). Dropout rate.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.use_new_attention_order">
+<span class="sig-name descname"><span class="pre">use_new_attention_order</span></span><a class="headerlink" href="#neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.use_new_attention_order" title="Link to this definition"></a></dt>
+<dd><p>bool (by default False). If true, the unet will use QKVAttention
+layers, if False, will use QKVAttentionLegacy.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.t">
+<span class="sig-name descname"><span class="pre">t</span></span><a class="headerlink" href="#neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.t" title="Link to this definition"></a></dt>
+<dd><p>int (by default 150). Number of diffusion steps applied for each image.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.t_delta">
+<span class="sig-name descname"><span class="pre">t_delta</span></span><a class="headerlink" href="#neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.t_delta" title="Link to this definition"></a></dt>
+<dd><p>int (by default 15). Strength of the noise added before the diffusion process.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.use_bm">
+<span class="sig-name descname"><span class="pre">use_bm</span></span><a class="headerlink" href="#neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.use_bm" title="Link to this definition"></a></dt>
+<dd><p>float (by default False) #Erreur sur la valeur?</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.use_checkpoint">
+<span class="sig-name descname"><span class="pre">use_checkpoint</span></span><a class="headerlink" href="#neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.use_checkpoint" title="Link to this definition"></a></dt>
+<dd><p>bool (by default False). gradient checkpointing for training</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.conv_resample">
+<span class="sig-name descname"><span class="pre">conv_resample</span></span><a class="headerlink" href="#neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.conv_resample" title="Link to this definition"></a></dt>
+<dd><p>bool (by default True). Use learned convolutions for upsampling and
+downsampling. If false, interpolation (nearest) will be used.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.sample_step">
+<span class="sig-name descname"><span class="pre">sample_step</span></span><a class="headerlink" href="#neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.sample_step" title="Link to this definition"></a></dt>
+<dd><p>int (by default 1). Number of time the diffusion process (noise addition +
+denoising) is repeated for each image.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.rand_t">
+<span class="sig-name descname"><span class="pre">rand_t</span></span><a class="headerlink" href="#neural_de.transformations._diffusion._diffpure_config.DiffPureConfig.rand_t" title="Link to this definition"></a></dt>
+<dd><p>bool (by default False). If true, add random noise before denoising. The noise is
+sampled uniformly between -t_delta and +t_delta.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="neural_de.html" class="btn btn-neutral float-left" title="👨‍💻 neural_de package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="neural_de.external.prenet.html" class="btn btn-neutral float-right" title="neural_de.external.prenet package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Nelson Fernandez Pinto.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
